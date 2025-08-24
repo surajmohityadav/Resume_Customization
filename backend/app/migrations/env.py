@@ -56,29 +56,24 @@ def run_migrations_offline() -> None:
     with context.begin_transaction():
         context.run_migrations()
 
-
 def run_migrations_online() -> None:
     """Run migrations in 'online' mode.
-
-    In this scenario we need to create an Engine
-    and associate a connection with the context.
-
+    ...
     """
-    url = os.getenv("DATABASE_URL", "postgresql://postgres:1234!%40#$@localhost:5432/resume_db")
+    # Build the DATABASE_URL from individual environment variables
+    db_user = os.getenv("DB_USER", "postgres")
+    db_password = quote_plus(os.getenv("DB_PASSWORD", "1234!@#$"))
+    db_host = os.getenv("DB_HOST", "localhost")
+    db_port = os.getenv("DB_PORT", "5432")
+    db_name = os.getenv("DB_NAME", "resume_db")
+
+    url = f"postgresql://{db_user}:{db_password}@{db_host}:{db_port}/{db_name}"
+
     connectable = engine_from_config(
         {**config.get_section(config.config_ini_section, {}), "sqlalchemy.url": url},
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
-
-    with connectable.connect() as connection:
-        context.configure(
-            connection=connection, target_metadata=target_metadata
-        )
-
-        with context.begin_transaction():
-            context.run_migrations()
-
 
 if context.is_offline_mode():
     run_migrations_offline()

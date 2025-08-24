@@ -1,4 +1,50 @@
-/* frontend/styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: #f9fafb;
+  --foreground: #111827;
+  --muted-foreground: #6b7280;
+  --card: #ffffff;
+  --primary: #4f46e5;
+  --primary-foreground: #ffffff;
+  --secondary: #f3f4f6;
+  --border: #e5e7eb;
+}
+
+.dark {
+  --background: #030712;
+  --foreground: #f9fafb;
+  --muted-foreground: #9ca3af;
+  --card: #111827;
+  --primary: #6366f1;
+  --primary-foreground: #ffffff;
+  --secondary: #1f2937;
+  --border: #374151;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background);
+  color: var(--foreground);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-out forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.dark .ql-toolbar { background: #374151; border-color: #4b5563 !important; }
+.dark .ql-container { background: #1f2937; border-color: #4b5563 !important; }
+.dark .ql-editor { color: var(--foreground); }
+.dark .ql-snow .ql-stroke { stroke: #d1d5db; }
+.dark .ql-snow .ql-picker-label { color: #d1d5db; }

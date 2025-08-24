@@ -1,3 +1,4 @@
+'use client';
 import { ChangeEvent } from 'react';
 
 interface Props {
@@ -10,12 +11,16 @@ export function JobDescription({ onChange }: Props) {
   };
 
   return (
-    <div className="mb-4">
-      <label className="block text-sm font-medium mb-2 text-gray-700">Job Description</label>
+    <div>
+      <label htmlFor="job-description" className="block text-sm font-medium mb-1 text-muted-foreground">
+        Job Description
+      </label>
       <textarea
+        id="job-description"
         onChange={handleChange}
-        className="border rounded-lg p-2 w-full h-32 focus:outline-none focus:ring-2 focus:ring-green-300 bg-gray-50"
-        placeholder="Paste job description here..."
+        className="shadow-sm block w-full sm:text-sm rounded-md focus:ring-primary focus:border-primary bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-200 dark:border-gray-600 dark:placeholder-gray-500"
+        rows={8}
+        placeholder="Paste the full job description here..."
       />
     </div>
   );
